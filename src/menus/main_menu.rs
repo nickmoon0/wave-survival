@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 
+use crate::states::GameState;
 use super::Menu;
 
 pub fn plugin(app: &mut App) {
@@ -42,8 +43,10 @@ fn setup_main_menu(mut commands: Commands) {
 fn handle_input(
     keyboard: Res<ButtonInput<KeyCode>>,
     mut next_menu: ResMut<NextState<Menu>>,
+    mut next_game_state: ResMut<NextState<GameState>>,
 ) {
     if keyboard.just_pressed(KeyCode::Space) {
+        next_game_state.set(GameState::InGame);
         next_menu.set(Menu::None);
     }
 }
